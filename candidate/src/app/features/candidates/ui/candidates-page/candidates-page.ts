@@ -18,12 +18,11 @@ export class CandidatesPage {
   private readonly newCandidates = signal<CandidateResponse[]>([]);
 
   public readonly allCandidates = computed(() => {
-    const initial: CandidateResponse[] = [];
     const newOnes = this.newCandidates();
-    return [...initial, ...newOnes];
+    return [...newOnes];
   });
 
    onCandidateUploaded(candidate: CandidateResponse): void {
-    this.newCandidates.update((current: CandidateResponse[]) => [...current, candidate]);
+    this.newCandidates.update((current: CandidateResponse[]) => [candidate, ...current]);
   }
 }
