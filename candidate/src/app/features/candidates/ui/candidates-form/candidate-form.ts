@@ -8,7 +8,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupDirective, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -26,17 +26,18 @@ import { catchError, finalize, Observable, of, tap } from 'rxjs';
 })
 export class CandidateForm implements OnInit {
   public readonly fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInput');
-
+  
   public readonly loading = signal<boolean>(false);
   public readonly error = signal<string | null>(null);
   public readonly selectedFileName = signal<string | null>(null);
-
+  
   readonly candidateUploaded = output<CandidateResponse>();
-
+  
   public form!: FormGroup;
   private _formBuilder = inject(FormBuilder);
   private readonly _fileValidationService = inject(FileValidationService);
   private readonly _candidateService = inject(CandidateService);
+  private readonly _formDirective = viewChild<FormGroupDirective>(FormGroupDirective);
 
   ngOnInit(): void {
     this._buildForm();
@@ -111,6 +112,7 @@ export class CandidateForm implements OnInit {
 
   private _resetForm(): void {
     this.form.reset();
+    this._formDirective()?.resetForm();
     this.selectedFileName.set(null);
     this.error.set(null);
     this._clearFileInput();
