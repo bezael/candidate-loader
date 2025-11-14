@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams, provideHttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpParams, provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
@@ -22,14 +22,13 @@ const mockAPIResponse: ApiResponseModel = {
   status: true,
 };
 
-const mockArrayResponse: Array<ApiResponseModel> = [mockAPIResponse];
+const mockArrayResponse: ApiResponseModel[] = [mockAPIResponse];
 
 const API_FAKE_RESOURCE = '/entity';
 
 describe('BaseService', () => {
   let service: BaseService;
   let httpTestingController: HttpTestingController;
-  let httpClient: HttpClient;
   const baseUrl = environment.API_URL;
 
   beforeEach(() => {
@@ -42,7 +41,6 @@ describe('BaseService', () => {
       ],
     });
 
-    httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
     service = TestBed.inject(BaseService);
   });
@@ -90,7 +88,7 @@ describe('BaseService', () => {
       const endpoint = API_FAKE_RESOURCE;
       const expectedUrl = `${baseUrl}${endpoint}`;
 
-      service.get<Array<ApiResponseModel>>(endpoint).subscribe((response) => {
+      service.get<ApiResponseModel[]>(endpoint).subscribe((response) => {
         expect(response).toEqual(mockArrayResponse);
         done();
       });
@@ -106,7 +104,7 @@ describe('BaseService', () => {
       const headers = new HttpHeaders().set('X-Custom-Header', 'value');
       const params = new HttpParams().set('page', '1').set('limit', '10');
 
-      service.get<Array<ApiResponseModel>>(endpoint, { headers, params }).subscribe((response) => {
+      service.get<ApiResponseModel[]>(endpoint, { headers, params }).subscribe((response) => {
         expect(response).toEqual(mockArrayResponse);
         done();
       });

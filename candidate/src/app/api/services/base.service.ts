@@ -39,7 +39,7 @@ export class BaseService implements BaseInterface {
    * @param {RequestOptions} options options of the request like headers, etc.
    * @returns {Observable<T>}
    */
-  public post<T>(endPoint: string, body?: any, options?: RequestOptions): Observable<T> {
+  public post<T>(endPoint: string, body?: unknown, options?: RequestOptions): Observable<T> {
     return this.http.post<T>(`${this.API}${endPoint}`, body, options);
   }
 

@@ -17,10 +17,11 @@
   </mat-form-field>
 <!-- TODO: move to a component -->
   <div class="candidate-form__file-container">
-    <label class="candidate-form__file-label">Excel File *</label>
+    <label for="excel-file-input" class="candidate-form__file-label">Excel File *</label>
     <div class="candidate-form__file-wrapper">
       <input
         #fileInput
+        id="excel-file-input"
         type="file"
         accept=".xlsx,.xls"
         (change)="onFileSelected($event)"
