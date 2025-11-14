@@ -1,5 +1,5 @@
 <div class="candidate-table__container">
-  <table mat-table [dataSource]="candidates()" class="candidate-table">
+  <table role="table" aria-label="Candidates table" mat-table [dataSource]="candidates()" class="candidate-table">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef class="candidate-table__header">Name</th>
       <td mat-cell *matCellDef="let candidate" class="candidate-table__cell">{{ candidate.name }}</td>
