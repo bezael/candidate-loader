@@ -1,0 +1,66 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="candidate-form">
+  <h2 class="candidate-form__title">Upload Candidate</h2>
+  <mat-form-field appearance="outline" class="candidate-form__field">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" type="text" />
+    @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+      <mat-error>Name is required</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="candidate-form__field">
+    <mat-label>Surname</mat-label>
+    <input matInput formControlName="surname" type="text" />
+    @if (form.get('surname')?.hasError('required') && form.get('surname')?.touched) {
+      <mat-error>Surname is required</mat-error>
+    }
+  </mat-form-field>
+<!-- TODO: move to a component -->
+  <div class="candidate-form__file-container">
+    <label class="candidate-form__file-label">Excel File *</label>
+    <div class="candidate-form__file-wrapper">
+      <input
+        #fileInput
+        type="file"
+        accept=".xlsx,.xls"
+        (change)="onFileSelected($event)"
+        class="candidate-form__file-input"
+      />
+      <button
+        type="button"
+        mat-stroked-button
+        (click)="fileInput.click()"
+        class="candidate-form__file-button"
+      >
+        Select File
+      </button>
+      @if (selectedFileName()) {
+        <span class="candidate-form__file-name">{{ selectedFileName() }}</span>
+      }
+    </div>
+    @if (form.get('file')?.hasError('required') && form.get('file')?.touched) {
+      <div class="candidate-form__file-error">Excel File is required</div>
+    }
+  </div>
+
+  @if (error()) {
+    <div class="candidate-form__error">
+      {{ error() }}
+    </div>
+  }
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="form.invalid || loading()"
+    class="candidate-form__submit"
+  >
+    @if (loading()) {
+      Loading...
+    } @else {
+      Upload Candidate
+    }
+  </button>
+</form>
+  
