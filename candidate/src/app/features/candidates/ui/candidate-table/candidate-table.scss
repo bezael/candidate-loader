@@ -1,0 +1,41 @@
+.candidate-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  &__container {
+    overflow-x: auto;
+  }
+
+
+  &__header {
+    background-color: var(--candidate-table-header-bg);
+    font-weight: 600;
+    color: var(--candidate-table-header-color);
+    padding: var(--candidate-table-padding);
+    text-align: left;
+  }
+
+
+  &__cell {
+    padding: var(--candidate-table-padding);
+    text-align: left;
+  }
+
+  &__row {
+    &[mat-row]:hover {
+      background-color: var(--candidate-table-row-hover-bg);
+    }
+  }
+
+  &__status {
+    font-weight: 500;
+
+    &--available {
+      color: var(--candidate-table-status-available-color);
+    }
+
+    &--unavailable {
+      color: var(--candidate-table-status-unavailable-color);
+    }
+  }
+}
