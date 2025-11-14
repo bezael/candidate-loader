@@ -1,0 +1,22 @@
+@let candidatesData = displayedCandidates();
+
+@if (candidatesData.length > 0) {
+<div class="candidate-list">
+  <h2 class="candidate-list__title">Candidates List</h2>
+  @defer (when !loading() || candidates(); on immediate) {
+  <app-candidate-table [candidates]="candidatesData" [displayedColumns]="displayedColumns()" />
+  } @placeholder {
+  <div class="candidate-list__loading">
+    <mat-spinner diameter="40" />
+    <p>Loading content...</p>
+  </div>
+  } @loading (minimum 200ms) {
+  <div class="candidate-list__loading">
+    <mat-spinner diameter="40" />
+    <p>Loading candidates...</p>
+  </div>
+  } @error {
+  <p class="candidate-list__error">Error loading candidates. Please try again later.</p>
+  }
+</div>
+}

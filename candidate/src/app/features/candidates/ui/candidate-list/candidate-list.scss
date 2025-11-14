@@ -1,0 +1,35 @@
+.candidate-list {
+  padding: var(--spacing-xl);
+  max-width: var(--max-width-md);
+  margin: 0 auto;
+
+
+  &__title {
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-primary);
+  }
+
+
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xl);
+  }
+
+
+  &__error {
+    color: var(--color-error);
+    font-weight: 500;
+    padding: var(--spacing-md);
+    background-color: var(--color-error-bg);
+    border-radius: var(--border-radius-sm);
+  }
+
+  &__empty {
+    padding: var(--spacing-xl);
+    text-align: center;
+    color: var(--color-text-secondary);
+  }
+}

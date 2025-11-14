@@ -32,8 +32,8 @@
         </span>
       </td>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="candidate-table__row"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns" class="candidate-table__row"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns()" class="candidate-table__row"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns()" class="candidate-table__row"></tr>
   </table>
 </div>
 
