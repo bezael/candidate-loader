@@ -1,0 +1,8 @@
+.candidates-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-xl);
+  max-width: var(--max-width-lg);
+  margin: 0 auto;
+}
