@@ -1,14 +1,15 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { CandidateSeniority } from '../types/candidate.types';
 
 @Injectable()
 export class CandidateDataParserService {
-  parseSeniority(raw: unknown): 'junior' | 'senior' {
+  parseSeniority(raw: unknown): CandidateSeniority {
     if (raw !== 'junior' && raw !== 'senior') {
       throw new BadRequestException(
         "Column 'seniority' must be 'junior' or 'senior'",
       );
     }
-    return raw;
+    return raw as CandidateSeniority;
   }
 
   parseYears(raw: unknown): number {
@@ -22,6 +23,7 @@ export class CandidateDataParserService {
     if (typeof raw === 'boolean') return raw;
 
     if (typeof raw === 'string') {
+      const normalized = raw.toLowerCase().trim();
       const mapping: Record<string, boolean> = {
         true: true,
         '1': true,
@@ -33,8 +35,8 @@ export class CandidateDataParserService {
         n: false,
       };
 
-      if (raw in mapping) {
-        return mapping[raw];
+      if (normalized in mapping) {
+        return mapping[normalized];
       }
     }
 

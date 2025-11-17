@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsString } from 'class-validator';
+import { CandidateSeniority } from '../types/candidate.types';
 
 export class CreateCandidateDto {
   @IsString({ message: 'Name must be a string' })
@@ -13,7 +14,7 @@ export class CreateCandidateDto {
 export class CandidateResponseDto {
   name!: string;
   surname!: string;
-  seniority!: 'junior' | 'senior';
+  seniority!: CandidateSeniority;
   years!: number;
   availability!: boolean;
 }

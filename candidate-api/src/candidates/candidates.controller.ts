@@ -22,7 +22,7 @@ export class CandidatesController {
   )
   uploadCandidate(
     @Body() body: CreateCandidateDto,
-    @UploadedFile() file: any,
+    @UploadedFile() file: Express.Multer.File | undefined,
   ): CandidateResponseDto {
     const { name, surname } = body;
     return this.candidatesService.processCandidate(name, surname, file);
