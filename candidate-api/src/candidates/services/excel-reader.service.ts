@@ -1,11 +1,12 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import * as XLSX from 'xlsx';
+import { EXCEL_CONFIG } from '../../common/constants';
 
 @Injectable()
 export class ExcelReaderService {
   readFirstRow(file: Express.Multer.File): Record<string, unknown> {
     const workbook = XLSX.read(file.buffer, { type: 'buffer' });
-    const sheetName = workbook.SheetNames[0];
+    const sheetName = workbook.SheetNames[EXCEL_CONFIG.FIRST_SHEET_INDEX];
     const sheet = workbook.Sheets[sheetName];
 
     const rows = XLSX.utils.sheet_to_json<Record<string, unknown>>(sheet, {
@@ -16,6 +17,6 @@ export class ExcelReaderService {
       throw new BadRequestException('Excel file has no data rows');
     }
 
-    return rows[0];
+    return rows[EXCEL_CONFIG.FIRST_ROW_INDEX];
   }
 }

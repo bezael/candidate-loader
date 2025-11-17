@@ -6,6 +6,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { FILE_CONFIG } from '../common/constants';
 import { CandidatesService } from './candidates.service';
 import { CandidateResponseDto, CreateCandidateDto } from './dto/candidate.dto';
 
@@ -16,7 +17,7 @@ export class CandidatesController {
   @Post()
   @UseInterceptors(
     FileInterceptor('file', {
-      limits: { fileSize: 5 * 1024 * 1024 },
+      limits: { fileSize: FILE_CONFIG.MAX_FILE_SIZE_BYTES },
     }),
   )
   uploadCandidate(
